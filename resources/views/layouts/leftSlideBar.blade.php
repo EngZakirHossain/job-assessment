@@ -23,14 +23,14 @@
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Sale <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="{{route('sales.create')}}">Add sales</a></li>
-                            <li><a href="{{route('sales.index')}}">Sales</a></li>
-                            <li><a href="{{route('sales.trash')}}">Trash</a></li>
+                            <li><a href="{{route('suppliers.create')}}">Add Suppliers</a></li>
+                            <li><a href="{{route('suppliers.index')}}">Suppliers</a></li>
+                            <li><a href="{{route('suppliers.trash')}}">Trash</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-        </ul>        
+        </ul>
     </div>
 </div>
 <!-- end left-sidenav-->

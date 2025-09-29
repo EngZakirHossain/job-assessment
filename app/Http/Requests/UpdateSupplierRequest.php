@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSaleRequest extends FormRequest
+class UpdateSupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,13 @@ class StoreSaleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
-            'sale_date' => 'required|date',
-            'items' => 'required|array|min:1',
-            'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|numeric|min:1',
-            'items.*.unit_price' => 'required|numeric|min:0',
-            'items.*.discount' => 'nullable|numeric|min:0',
-            'notes' => 'nullable|string|max:2000',
+            'country' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'code' => 'required|string|max:100|unique:suppliers,code,'.$this->route('supplier')->id,
+            'email' => 'nullable|email',
+            'phone' => 'nullable|string|max:50',
+            'rep_email' => 'nullable|email',
+            'rep_phone' => 'nullable|string|max:50',
         ];
     }
 }

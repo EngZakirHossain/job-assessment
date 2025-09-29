@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Note extends Model
+class FabricStock extends Model
 {
-    protected $fillable = ['body','created_by'];
+    protected $fillable = ['fabric_id','type','qty','remarks','created_by'];
 
-    public function notable()
+    public function fabric()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Fabric::class);
     }
 
     // protected static function booted()

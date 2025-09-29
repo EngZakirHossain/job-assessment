@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('sku')->nullable()->index();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price', 15, 2)->default(0); // base price
-            $table->integer('stock')->default(0);
+            $table->text('body');
+            $table->morphs('notable'); // notable_id, notable_type
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('notes');
     }
 };
