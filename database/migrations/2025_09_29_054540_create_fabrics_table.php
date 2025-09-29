@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('printing_method')->nullable();
             $table->integer('lead_time_days')->nullable();
             $table->integer('moq')->nullable();
-            $table->decimal('shrinkage',5,2)->nullable();
+            $table->decimal('shrinkage', 5, 2)->nullable();
             $table->text('remarks')->nullable();
             $table->string('fabric_selected_by')->nullable();
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
 {
-    protected $fillable = ['body','created_by'];
+    protected $fillable = ['body', 'created_by'];
 
     public function notable()
     {

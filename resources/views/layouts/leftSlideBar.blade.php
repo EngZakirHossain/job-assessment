@@ -18,14 +18,25 @@
             <hr class="hr-dashed hr-menu">
             <li class="menu-label my-2">Task List</li>
             <li>
-                <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Products</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
                     <li>
-                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Sale <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Suppliers <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="{{route('suppliers.create')}}">Add Suppliers</a></li>
                             <li><a href="{{route('suppliers.index')}}">Suppliers</a></li>
                             <li><a href="{{route('suppliers.trash')}}">Trash</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Fabric<span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{route('fabrics.create')}}">Add Fabric</a></li>
+                            <li><a href="{{route('fabrics.index')}}">Fabrics</a></li>
+                            <li><a href="{{route('fabrics.trash')}}">Trash</a></li>
                         </ul>
                     </li>
                 </ul>

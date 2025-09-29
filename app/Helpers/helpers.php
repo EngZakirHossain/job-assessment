@@ -26,3 +26,10 @@ if (! function_exists('calculateSaleTotal')) {
         return ['subtotal' => $subtotal, 'discount_total' => $discount_total, 'grand_total' => $grand];
     }
 }
+
+if (! function_exists('current_user_id')) {
+    function current_user_id()
+    {
+        return 1; // default user
+    }
+}

@@ -25,7 +25,7 @@ class StoreFabricStockRequest extends FormRequest
             'fabric_id' => 'required|exists:fabrics,id',
             'type' => 'required|in:in,out',
             'qty' => 'required|integer|min:1',
-            'remarks' => 'nullable|string'
+            'remarks' => 'nullable|string',
         ];
     }
 }

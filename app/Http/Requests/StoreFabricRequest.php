@@ -22,13 +22,25 @@ class StoreFabricRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'supplier_id' => 'nullable|exists:suppliers,id',
-        'fabric_no' => 'required|string|max:100',
-        'composition' => 'required|string|max:255',
-        'gsm' => 'nullable|numeric',
-        'qty' => 'required|integer|min:0',
-        'production_type' => 'required|in:Sample Yardage,SMS,Bulk',
-        'image' => 'nullable|image|max:2048'
-    ];
+            'supplier_id' => 'required|exists:suppliers,id',
+            'fabric_no' => 'required|string|max:255',
+            'composition' => 'required|string|max:255',
+            'gsm' => 'required|numeric',
+            'qty' => 'required|numeric',
+            'cuttable_width' => 'required|numeric',
+            'production_type' => 'required|string',
+            'construction' => 'nullable|string',
+            'color_pantone' => 'nullable|string',
+            'weave_type' => 'nullable|string',
+            'finish_type' => 'nullable|string',
+            'dyeing_method' => 'nullable|string',
+            'printing_method' => 'nullable|string',
+            'lead_time_days' => 'nullable|integer',
+            'moq' => 'nullable|integer',
+            'shrinkage' => 'nullable|numeric',
+            'remarks' => 'nullable|string',
+            'fabric_selected_by' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ];
     }
 }
