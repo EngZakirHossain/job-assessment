@@ -11,17 +11,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets')}}/images/favicon1.ico">
-
-        <!-- jvectormap -->
-        <link href="{{asset('assets')}}/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+        <link rel="shortcut icon" href="{{asset('assets')}}/images/default.jpg">
 
         <!-- App css -->
         <link href="{{asset('assets')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets')}}/css/jquery-ui.min.css" rel="stylesheet">
         <link href="{{asset('assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets')}}/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets')}}/css/app.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -58,7 +54,6 @@
         <script src="{{asset('assets')}}/js/simplebar.min.js"></script>
         <script src="{{asset('assets')}}/js/jquery-ui.min.js"></script>
         <script src="{{asset('assets')}}/js/moment.js"></script>
-        <script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
         <!-- App js -->

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('gsm', 8, 2)->nullable();
             $table->integer('qty')->default(0);
             $table->string('cuttable_width')->nullable();
-            $table->enum('production_type', ['Sample Yardage', 'SMS', 'Bulk'])->default('Bulk');
+            $table->enum('production_type', ['Knitting', 'Weaving', 'Dyeing'])->default('Dyeing');
 
             // optional
             $table->string('construction')->nullable();

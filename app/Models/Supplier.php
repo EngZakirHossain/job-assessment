@@ -9,7 +9,7 @@ use Laravel\Prompts\Note;
 
 class Supplier extends Model
 {
-    use SoftDeletes,HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $fillable = [
         'country', 'company_name', 'code', 'email', 'phone', 'address',

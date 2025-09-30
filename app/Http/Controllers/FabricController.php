@@ -13,7 +13,6 @@ use Milon\Barcode\DNS1D;
 
 class FabricController extends Controller
 {
-    // Show all fabrics
     public function index(Request $request)
     {
         $query = Fabric::with('supplier');
@@ -42,7 +41,6 @@ class FabricController extends Controller
         return view('fabrics.index', compact('fabrics'));
     }
 
-    // Show create form
     public function create()
     {
         $suppliers = Supplier::all();
@@ -50,7 +48,6 @@ class FabricController extends Controller
         return view('fabrics.create', compact('suppliers'));
     }
 
-    // Store fabric
     public function store(StoreFabricRequest $request)
     {
 
@@ -65,13 +62,11 @@ class FabricController extends Controller
         $data['added_by'] = 1;
         $data['added_date'] = now();
 
-        // Save fabric
         $fabric = Fabric::create($data);
 
         return redirect()->route('fabrics.index')->with('success', 'Fabric added successfully.');
     }
 
-    // Show edit form
     public function edit(Fabric $fabric)
     {
         $suppliers = Supplier::all();
@@ -79,7 +74,6 @@ class FabricController extends Controller
         return view('fabrics.edit', compact('fabric', 'suppliers'));
     }
 
-    // Update fabric
     public function update(UpdateFabricRequest $request, Fabric $fabric)
     {
 

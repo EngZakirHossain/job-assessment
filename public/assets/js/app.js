@@ -10,51 +10,6 @@
 (function ($) {
 
     'use strict';
-    function initDateRangrPicker() {
-        if ($('#Dash_Date').length == 0) {
-            return;
-        }
-
-        var picker = $('#Dash_Date');
-        var start = moment();
-        var end = moment();
-
-        function cb(start, end, label) {
-            var title = '';
-            var range = '';
-
-            if ((end - start) < 100 || label == 'Today') {
-                title = 'Today:';
-                range = start.format('MMM D');
-            } else if (label == 'Yesterday') {
-                title = 'Yesterday:';
-                range = start.format('MMM D');
-            } else {
-                range = start.format('MMM D') + ' - ' + end.format('MMM D');
-            }
-
-            picker.find('#Select_date').html(range);
-            picker.find('#Day_Name').html(title);
-        }
-
-        picker.daterangepicker({
-            startDate: start,
-            endDate: end,
-            opens: 'left',
-            applyClass: "btn btn-sm btn-primary",
-            cancelClass: "btn btn-sm btn-secondary",
-            ranges: {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            }
-        }, cb);
-
-        cb(start, end, '');
-    }
 
     function initMetisMenu() {
         //metis menu

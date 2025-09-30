@@ -78,7 +78,9 @@
         </table>
     </div>
 
-    {{ $suppliers->links() }}
+    <div class="d-flex justify-content-center">
+        {{ $suppliers->links() }}
+    </div>
 </div>
 @endsection
 @push('scripts')

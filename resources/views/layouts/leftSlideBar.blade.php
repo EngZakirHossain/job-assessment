@@ -4,7 +4,7 @@
     <div class="brand">
         <a href="{{route('dashboard')}}" class="logo">
             <span>
-                <img src="{{asset('assets')}}/images/logo.svg" alt="logo-small" class="logo-sm">
+                <img src="{{asset('assets')}}/images/default.jpg" alt="logo-small" class="logo-sm">
             </span>
         </a>
     </div>

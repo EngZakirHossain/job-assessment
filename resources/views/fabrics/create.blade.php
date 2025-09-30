@@ -46,9 +46,9 @@
         <div class="col-md-4">
             <label class="form-label">Production Type</label>
             <select name="production_type" class="form-select form-control" required>
-                <option value="Sample Yardage">Sample Yardage</option>
-                <option value="SMS">SMS</option>
-                <option value="Bulk">Bulk</option>
+                <option value="Dyeing">Dyeing</option>
+                <option value="Knitting">Knitting</option>
+                <option value="Weaving">Weaving</option>
             </select>
         </div>
 

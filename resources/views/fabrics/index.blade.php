@@ -27,9 +27,9 @@
         <div class="col-md-2">
             <select name="production_type" class="form-select form-control">
                 <option value="">Production Type</option>
-                <option value="Sample Yardage" {{ request('production_type')=='Sample Yardage'?'selected':'' }}>Sample Yardage</option>
-                <option value="SMS" {{ request('production_type')=='SMS'?'selected':'' }}>SMS</option>
-                <option value="Bulk" {{ request('production_type')=='Bulk'?'selected':'' }}>Bulk</option>
+                <option value="Dyeing" {{ request('production_type')=='Dyeing'?'selected':'' }}>Dyeing</option>
+                <option value="Knitting" {{ request('production_type')=='Knitting'?'selected':'' }}>Knitting</option>
+                <option value="Weaving" {{ request('production_type')=='Weaving'?'selected':'' }}>Weaving</option>
             </select>
         </div>
         <div class="col-md-2">
@@ -69,8 +69,10 @@
                     </td>
                     <td>{{ $fabric->production_type }}</td>
                     <td>
-                        @if($fabric->image_path)
+                        @if($fabric->image_path && file_exists(public_path($fabric->image_path)))
                             <img src="{{ asset('storage/'.$fabric->image_path) }}" class="img-thumbnail" width="60">
+                        @else
+                            <img src="{{ asset('assets/images/default.jpg') }}" class="img-thumbnail" width="60">
                         @endif
                     </td>
                     <td class="text-center">
