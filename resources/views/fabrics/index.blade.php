@@ -1,13 +1,10 @@
 @extends('layouts.masterLayout')
-@section('pageTitle') suppliers List @endsection
+@section('pageTitle') Fabric List @endsection
 
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Fabric List</h2>
-        <a href="{{ route('fabrics.create') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle"></i> Add Fabric
-        </a>
     </div>
 
     <!-- Filters -->
@@ -32,18 +29,23 @@
                 <option value="Weaving" {{ request('production_type')=='Weaving'?'selected':'' }}>Weaving</option>
             </select>
         </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-dark w-100">
-                <i class="bi bi-search"></i> Filter
-            </button>
+        <div class="col-md-2 d-flex gap-2">
+            <button class="btn btn-primary">Filter</button>
+            <a href="{{ route('fabrics.index') }}" class="btn btn-secondary">Reset</a>
         </div>
     </form>
 
+    <div class="mb-3">
+        <a href="{{ route('fabrics.create') }}" class="btn btn-success">+ Add Fabric</a>
+        <a href="{{ route('fabrics.trash') }}" class="btn btn-warning">Trash</a>
+    </div>
+
     <!-- Table -->
     <div class="table-responsive ">
-        <table class="table table-bordered table-hover align-middle">
+        <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark text-center">
                 <tr>
+                    <th>#</th>
                     <th>Fabric No</th>
                     <th>Supplier</th>
                     <th>Composition</th>
@@ -59,6 +61,7 @@
             <tbody>
                 @forelse($fabrics as $fabric)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $fabric->fabric_no }}</td>
                     <td>{{ $fabric->supplier->company_name ?? '-' }}</td>
                     <td>{{ $fabric->composition }}</td>
