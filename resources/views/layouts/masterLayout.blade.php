@@ -4,9 +4,9 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>ITWAYBD</title>
+        <title>Job Assessment</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta content="ITWAYBD" name="description" />
+        <meta content="Job Assessment" name="description" />
         <meta content="" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -42,7 +42,7 @@
                 </div><!-- container -->
 
                 <footer class="footer text-center text-sm-left">
-                    &copy; {{date('Y')}} ITWAYBD <span class="d-none d-sm-inline-block float-right">Developed <i class="mdi mdi-heart text-danger"></i> by Zakir Hossain</span>
+                    &copy; {{date('Y')}} Job Assessment <span class="d-none d-sm-inline-block float-right">Developed <i class="mdi mdi-heart text-danger"></i> by Zakir Hossain</span>
                 </footer><!--end footer-->
             </div>
             <!-- end page content -->
