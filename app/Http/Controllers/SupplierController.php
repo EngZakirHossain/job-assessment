@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-
     public function index(Request $request)
     {
         $filters = $request->only(['country', 'company_name', 'rep_name', 'from', 'to', 'q']);
@@ -23,17 +22,15 @@ class SupplierController extends Controller
             });
         }
 
-        $suppliers = $query->filter($filters)->orderBy('company_name')->paginate(10)->withQueryString();
+        $suppliers = $query->filter($filters)->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
         return view('suppliers.index', compact('suppliers', 'filters'));
     }
-
 
     public function create()
     {
         return view('suppliers.create');
     }
-
 
     public function store(StoreSupplierRequest $request)
     {
@@ -43,18 +40,15 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.index')->with('success', 'Supplier created');
     }
 
-
     public function show(Supplier $supplier)
     {
         return view('suppliers.edit', compact('supplier'));
     }
 
-
     public function edit(Supplier $supplier)
     {
         return view('suppliers.edit', compact('supplier'));
     }
-
 
     public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
@@ -62,7 +56,6 @@ class SupplierController extends Controller
 
         return redirect()->route('suppliers.index')->with('success', 'Supplier updated');
     }
-
 
     public function destroy(Supplier $supplier)
     {

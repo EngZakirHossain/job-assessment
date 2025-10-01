@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\TracksUserAndDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Laravel\Prompts\Note;
 
 class Supplier extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes , TracksUserAndDates;
 
     protected $fillable = [
         'country', 'company_name', 'code', 'email', 'phone', 'address',
@@ -58,23 +59,4 @@ class Supplier extends Model
 
         return $query;
     }
-
-    // Boot for model events (added/updated metadata)
-    protected static function booted()
-    {
-        static::creating(function ($model) {
-            $model->added_by = current_user_id();
-            $model->added_date = now();
-        });
-
-        static::updating(function ($model) {
-            $model->updated_by = current_user_id();
-            $model->updated_date = now();
-        });
-    }
-
-    protected $casts = [
-        'added_date' => 'datetime',
-        'updated_date' => 'datetime',
-    ];
 }

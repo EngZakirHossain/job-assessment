@@ -1,5 +1,10 @@
 @extends('layouts.masterLayout')
-@section('pageTitle') Create Sale @endsection
+@section('pageTitle') Create Fabrics  @endsection
+@push('styles')
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@endpush
 
 @section('content')
 <div class="container">
@@ -10,10 +15,10 @@
 
         <div class="col-md-6">
             <label class="form-label">Supplier</label>
-            <select name="supplier_id" class="form-select form-control" required>
+            <select name="supplier_id" class="form-select form-control select2" required>
                 <option value="">Select Supplier</option>
                 @foreach($suppliers as $supplier)
-                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
+                    <option value="{{ $supplier->id }}">{{ $supplier->company_name }}</option>
                 @endforeach
             </select>
         </div>
@@ -124,5 +129,19 @@
 @endsection
 
 @push('scripts')
+<!-- jQuery (required for Select2) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Select Supplier",
+            allowClear: true,
+            width: '100%' // make it full width
+        });
+    });
+</script>
+
 
 @endpush

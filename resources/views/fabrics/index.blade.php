@@ -84,6 +84,9 @@
                         </a>
                     </td>
                     <td class="text-center">
+                        <a href="{{ route('fabrics.show',$fabric->id) }}" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil-square">Show</i>
+                        </a>
                         <a href="{{ route('fabrics.edit',$fabric->id) }}" class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil-square">Edit</i>
                         </a>

@@ -1,88 +1,148 @@
 @extends('layouts.masterLayout')
-@section('pageTitle', 'Edit Sale')
+@section('pageTitle') Edit Fabric @endsection
+
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 
 @section('content')
 <div class="container">
-    <h2>Edit Fabric</h2>
-    <form action="{{ route('fabrics.update',$fabric->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf @method('PUT')
+    <h2 class="mb-4">Edit Fabric</h2>
 
-        <label>Supplier</label>
-        <select name="supplier_id" class="form-control" required>
-            @foreach($suppliers as $supplier)
-            <option value="{{ $supplier->id }}" {{ $fabric->supplier_id==$supplier->id?'selected':'' }}>
-                {{ $supplier->company_name }}
-            </option>
-            @endforeach
-        </select>
+    <form action="{{ route('fabrics.update', $fabric->id) }}" method="POST" enctype="multipart/form-data" class="row g-3">
+        @csrf
+        @method('PUT')
 
-        <label>Fabric No</label>
-        <input type="text" name="fabric_no" class="form-control" value="{{ $fabric->fabric_no }}" required>
+        <div class="col-md-6">
+            <label class="form-label">Supplier</label>
+            <select name="supplier_id" class="form-select form-control select2" required>
+                <option value="">Select Supplier</option>
+                @foreach($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}" {{ $fabric->supplier_id == $supplier->id ? 'selected' : '' }}>
+                        {{ $supplier->company_name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
 
-        <label>Composition</label>
-        <input type="text" name="composition" class="form-control" value="{{ $fabric->composition }}" required>
+        <div class="col-md-6">
+            <label class="form-label">Fabric No</label>
+            <input type="text" name="fabric_no" class="form-control" value="{{ $fabric->fabric_no }}" required>
+        </div>
 
-        <label>GSM</label>
-        <input type="number" name="gsm" class="form-control" value="{{ $fabric->gsm }}" required>
+        <div class="col-md-6">
+            <label class="form-label">Composition</label>
+            <input type="text" name="composition" class="form-control" value="{{ $fabric->composition }}" required>
+        </div>
 
-        <label>QTY</label>
-        <input type="number" name="qty" class="form-control" value="{{ $fabric->qty }}" required>
+        <div class="col-md-3">
+            <label class="form-label">GSM</label>
+            <input type="number" name="gsm" class="form-control" value="{{ $fabric->gsm }}" required>
+        </div>
 
-        <label>Cuttable Width</label>
-        <input type="number" name="cuttable_width" class="form-control" value="{{ $fabric->cuttable_width }}" required>
+        <div class="col-md-3">
+            <label class="form-label">QTY</label>
+            <input type="number" name="qty" class="form-control" value="{{ $fabric->qty }}" required>
+        </div>
 
-        <label>Production Type</label>
-        <select name="production_type" class="form-control" required>
-            <option value="Sample Yardage" {{ $fabric->production_type=="Sample Yardage"?'selected':'' }}>Sample Yardage</option>
-            <option value="SMS" {{ $fabric->production_type=="SMS"?'selected':'' }}>SMS</option>
-            <option value="Bulk" {{ $fabric->production_type=="Bulk"?'selected':'' }}>Bulk</option>
-        </select>
+        <div class="col-md-4">
+            <label class="form-label">Cuttable Width</label>
+            <input type="number" name="cuttable_width" class="form-control" value="{{ $fabric->cuttable_width }}" required>
+        </div>
 
-        <!-- optional fields prefilled -->
-        <label>Construction</label>
-        <input type="text" name="construction" class="form-control" value="{{ $fabric->construction }}">
+        <div class="col-md-4">
+            <label class="form-label">Production Type</label>
+            <select name="production_type" class="form-select form-control" required>
+                <option value="Dyeing" {{ $fabric->production_type == 'Dyeing' ? 'selected' : '' }}>Dyeing</option>
+                <option value="Knitting" {{ $fabric->production_type == 'Knitting' ? 'selected' : '' }}>Knitting</option>
+                <option value="Weaving" {{ $fabric->production_type == 'Weaving' ? 'selected' : '' }}>Weaving</option>
+            </select>
+        </div>
 
-        <label>Color Pantone Code</label>
-        <input type="text" name="color_pantone_code" class="form-control" value="{{ $fabric->color_pantone_code }}">
+        <div class="col-md-4">
+            <label class="form-label">Fabric Image</label><br>
+            @if($fabric->image_path && file_exists(storage_path('app/public/'.$fabric->image_path)))
+                <img src="{{ asset('storage/'.$fabric->image_path) }}" class="img-thumbnail mb-2" width="100">
+            @else
+                <img src="{{ asset('assets/images/default.jpg') }}" class="img-thumbnail mb-2" width="100">
+            @endif
+            <input type="file" name="image" class="form-control">
+        </div>
 
-        <label>Weave Type</label>
-        <input type="text" name="weave_type" class="form-control" value="{{ $fabric->weave_type }}">
+        <!-- Optional Fields -->
+        <div class="col-md-6">
+            <label class="form-label">Construction</label>
+            <input type="text" name="construction" class="form-control" value="{{ $fabric->construction }}">
+        </div>
 
-        <label>Finish Type</label>
-        <input type="text" name="finish_type" class="form-control" value="{{ $fabric->finish_type }}">
+        <div class="col-md-6">
+            <label class="form-label">Color Pantone Code</label>
+            <input type="text" name="color_pantone" class="form-control" value="{{ $fabric->color_pantone }}">
+        </div>
 
-        <label>Dyeing Method</label>
-        <input type="text" name="dyeing_method" class="form-control" value="{{ $fabric->dyeing_method }}">
+        <div class="col-md-6">
+            <label class="form-label">Weave Type</label>
+            <input type="text" name="weave_type" class="form-control" value="{{ $fabric->weave_type }}">
+        </div>
 
-        <label>Printing Method</label>
-        <input type="text" name="printing_method" class="form-control" value="{{ $fabric->printing_method }}">
+        <div class="col-md-6">
+            <label class="form-label">Finish Type</label>
+            <input type="text" name="finish_type" class="form-control" value="{{ $fabric->finish_type }}">
+        </div>
 
-        <label>Lead Time</label>
-        <input type="text" name="lead_time" class="form-control" value="{{ $fabric->lead_time }}">
+        <div class="col-md-6">
+            <label class="form-label">Dyeing Method</label>
+            <input type="text" name="dyeing_method" class="form-control" value="{{ $fabric->dyeing_method }}">
+        </div>
 
-        <label>MOQ</label>
-        <input type="number" name="moq" class="form-control" value="{{ $fabric->moq }}">
+        <div class="col-md-6">
+            <label class="form-label">Printing Method</label>
+            <input type="text" name="printing_method" class="form-control" value="{{ $fabric->printing_method }}">
+        </div>
 
-        <label>Shrinkage (%)</label>
-        <input type="number" step="0.01" name="shrinkage" class="form-control" value="{{ $fabric->shrinkage }}">
+        <div class="col-md-4">
+            <label class="form-label">Lead Time</label>
+            <input type="text" name="lead_time" class="form-control" value="{{ $fabric->lead_time }}">
+        </div>
 
-        <label>Remarks</label>
-        <textarea name="remarks" class="form-control">{{ $fabric->remarks }}</textarea>
+        <div class="col-md-4">
+            <label class="form-label">MOQ</label>
+            <input type="number" name="moq" class="form-control" value="{{ $fabric->moq }}">
+        </div>
 
-        <label>Fabric Selected By</label>
-        <input type="text" name="fabric_selected_by" class="form-control" value="{{ $fabric->fabric_selected_by }}">
+        <div class="col-md-4">
+            <label class="form-label">Shrinkage (%)</label>
+            <input type="number" step="0.01" name="shrinkage" class="form-control" value="{{ $fabric->shrinkage }}">
+        </div>
 
-        <label>Fabric Image</label>
-        <input type="file" name="image" class="form-control">
-        @if($fabric->image)
-            <img src="{{ asset('storage/'.$fabric->image) }}" width="80">
-        @endif
+        <div class="col-md-12">
+            <label class="form-label">Remarks</label>
+            <textarea name="remarks" class="form-control">{{ $fabric->remarks }}</textarea>
+        </div>
 
-        <button type="submit" class="btn btn-success mt-3">Update</button>
+        <div class="col-md-6">
+            <label class="form-label">Fabric Selected By</label>
+            <input type="text" name="fabric_selected_by" class="form-control" value="{{ $fabric->fabric_selected_by }}">
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-pencil"></i> Update Fabric
+            </button>
+            <a href="{{ route('fabrics.index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
 </div>
 @endsection
 
 @push('scripts')
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            width: '100%'
+        });
+    });
+</script>
 @endpush

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FabricController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SupplierController;
+use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 

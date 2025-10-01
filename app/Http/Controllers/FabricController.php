@@ -36,7 +36,7 @@ class FabricController extends Controller
             $query->where('production_type', $request->production_type);
         }
 
-        $fabrics = $query->paginate(10);
+        $fabrics = $query->orderBy('id', 'desc')->paginate(10);
 
         return view('fabrics.index', compact('fabrics'));
     }
@@ -58,13 +58,15 @@ class FabricController extends Controller
             $path = $request->file('image')->store('fabrics', 'public');
             $data['image_path'] = $path;
         }
-        $data['barcode'] = uniqid('FAB'); // generate barcode
-        $data['added_by'] = 1;
-        $data['added_date'] = now();
 
         $fabric = Fabric::create($data);
 
         return redirect()->route('fabrics.index')->with('success', 'Fabric added successfully.');
+    }
+
+    public function show(Fabric $fabric)
+    {
+        return view('fabrics.show', compact('fabric'));
     }
 
     public function edit(Fabric $fabric)
@@ -87,9 +89,6 @@ class FabricController extends Controller
 
             $data['image_path'] = $request->file('image')->store('fabrics', 'public');
         }
-
-        $data['updated_by'] = 1;
-        $data['updated_date'] = now();
 
         $fabric->update($data);
 

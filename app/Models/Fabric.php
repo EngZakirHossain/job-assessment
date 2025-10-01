@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\TracksUserAndDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fabric extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, TracksUserAndDates;
 
     protected $fillable = [
         'supplier_id', 'fabric_no', 'composition', 'gsm', 'qty', 'cuttable_width', 'production_type',
@@ -21,8 +22,6 @@ class Fabric extends Model
         'gsm' => 'decimal:2',
         'shrinkage' => 'decimal:2',
     ];
-
-    protected $dates = ['added_date', 'updated_date'];
 
     // Relationships
     public function supplier()
@@ -58,22 +57,5 @@ class Fabric extends Model
         $out = $this->stocks()->where('type', 'out')->sum('qty');
 
         return $in - $out;
-    }
-
-    protected static function booted()
-    {
-        static::creating(function ($model) {
-            $model->added_by = current_user_id();
-            $model->added_date = now();
-            // auto-generate barcode if not provided
-            if (empty($model->barcode)) {
-                $model->barcode = 'FAB-'.time().'-'.rand(1000, 9999);
-            }
-        });
-
-        static::updating(function ($model) {
-            $model->added_by = current_user_id();
-            $model->added_date = now();
-        });
     }
 }
