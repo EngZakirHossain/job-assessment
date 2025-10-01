@@ -24,7 +24,7 @@ class FabricFactory extends Factory
             'composition' => $this->faker->words(3, true),
             'gsm' => $this->faker->numberBetween(100, 350),
             'qty' => $this->faker->randomFloat(2, 50, 500),
-            'cuttable_width' => $this->faker->numberBetween(40, 90).' inch',
+            'cuttable_width' => $this->faker->numberBetween(40, 90),
             'production_type' => $this->faker->randomElement(['Knitting', 'Weaving', 'Dyeing']),
             'construction' => $this->faker->word(),
             'color_pantone' => strtoupper(Str::random(6)),

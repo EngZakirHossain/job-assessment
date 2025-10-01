@@ -58,4 +58,17 @@ class Fabric extends Model
 
         return $in - $out;
     }
+
+    // Fabric.php
+    protected static function booted()
+    {
+        static::created(function ($fabric) {
+            FabricStock::create([
+                'fabric_id' => $fabric->id,
+                'type' => 'in',
+                'qty' => $fabric->qty ?? 0,
+                'created_by' => auth()->id(),
+            ]);
+        });
+    }
 }

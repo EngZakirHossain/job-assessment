@@ -18,9 +18,9 @@ class FabricController extends Controller
         $query = Fabric::with('supplier');
 
         // Filters
-        if ($request->filled('company')) {
+        if ($request->filled('supplier')) {
             $query->whereHas('supplier', function ($q) use ($request) {
-                $q->where('company_name', 'like', "%{$request->company}%");
+                $q->where('company_name', 'like', "%{$request->supplier}%");
             });
         }
 

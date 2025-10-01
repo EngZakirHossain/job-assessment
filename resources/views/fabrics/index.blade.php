@@ -10,8 +10,8 @@
     <!-- Filters -->
     <form method="GET" class="row g-2 mb-4">
         <div class="col-md-3">
-            <input type="text" name="company" class="form-control" placeholder="Company"
-                   value="{{ request('company') }}">
+            <input type="text" name="supplier" class="form-control" placeholder="Supplier"
+                   value="{{ request('supplier') }}">
         </div>
         <div class="col-md-2">
             <input type="text" name="fabric_no" class="form-control" placeholder="Fabric No"
@@ -72,10 +72,10 @@
                     </td>
                     <td>{{ $fabric->production_type }}</td>
                     <td>
-                        @if($fabric->image_path && file_exists(public_path($fabric->image_path)))
-                            <img src="{{ asset('storage/'.$fabric->image_path) }}" class="img-thumbnail" width="60">
+                        @if($fabric->image_path && file_exists(storage_path('app/public/'.$fabric->image_path)))
+                            <img src="{{ asset('storage/'.$fabric->image_path) }}" class="img-thumbnail mb-2" width="100">
                         @else
-                            <img src="{{ asset('assets/images/default.jpg') }}" class="img-thumbnail" width="60">
+                            <img src="{{ asset('assets/images/default.jpg') }}" class="img-thumbnail mb-2" width="100">
                         @endif
                     </td>
                     <td class="text-center">

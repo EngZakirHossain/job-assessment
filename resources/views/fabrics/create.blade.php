@@ -95,7 +95,7 @@
 
         <div class="col-md-4">
             <label class="form-label">Lead Time</label>
-            <input type="text" name="lead_time" class="form-control">
+            <input type="text" name="lead_time_days" class="form-control">
         </div>
 
         <div class="col-md-4">
