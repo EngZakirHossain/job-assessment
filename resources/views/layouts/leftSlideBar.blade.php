@@ -33,14 +33,17 @@
                 <!-- Main Menu -->
                 <li class="pe-menu-title">Main</li>
                 <li class="pe-slide pe-has-sub">
-                    <a href="#collapseDashboards" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseDashboards">
+                    <a href="#collapseDashboards" class="pe-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                    data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('dashboard') ? 'true' : 'false' }}"
+                    aria-controls="collapseDashboards">
                         <i class="ri-dashboard-line pe-nav-icon"></i>
                         <span class="pe-nav-content">Dashboards</span>
                         <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
                     </a>
-                    <ul class="pe-slide-menu collapse" id="collapseDashboards">
+
+                    <ul class="pe-slide-menu collapse {{ request()->routeIs('dashboard') ? 'show' : '' }}" id="collapseDashboards">
                         <li class="pe-slide-item">
-                            <a href="{{route('dashboard')}}" class="pe-nav-link">
+                            <a href="{{ route('dashboard') }}" class="pe-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                                 Fabric Home
                             </a>
                         </li>
@@ -49,122 +52,50 @@
                 <!-- Pages -->
                 <li class="pe-menu-title">Task List</li>
                 <li class="pe-slide pe-has-sub">
-                    <a href="#collapseAuth" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseAuth">
+                   <a href="#collapseAuth" class="pe-nav-link {{ request()->routeIs('suppliers.*') ? 'active' : '' }}"
+                    data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('suppliers.*') ? 'true' : 'false' }}"
+                    aria-controls="collapseAuth">
                         <i class="ri-user-line pe-nav-icon"></i>
                         <span class="pe-nav-content">Suppliers</span>
                         <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
                     </a>
-                    <ul class="pe-slide-menu collapse" id="collapseAuth">
+
+                    <ul class="pe-slide-menu collapse {{ request()->routeIs('suppliers.*') ? 'show' : '' }}" id="collapseAuth">
                         <li class="pe-slide-item">
-                            <a href="{{route('suppliers.index')}}" class="pe-nav-link">
+                            <a href="{{ route('suppliers.index') }}" class="pe-nav-link {{ request()->routeIs('suppliers.index') ? 'active' : '' }}">
                                 Suppliers
                             </a>
                         </li>
                         <li class="pe-slide-item">
-                            <a href="{{route('suppliers.trash')}}" class="pe-nav-link">
+                            <a href="{{ route('suppliers.trash') }}" class="pe-nav-link {{ request()->routeIs('suppliers.trash') ? 'active' : '' }}">
                                 Trash Supplier
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="pe-slide pe-has-sub">
-                    <a href="#collapsePages" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapsePages">
+                    <a href="#collapsePages" class="pe-nav-link {{ request()->routeIs('fabrics.*') ? 'active' : '' }}"
+                    data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('fabrics.*') ? 'true' : 'false' }}"
+                    aria-controls="collapsePages">
                         <i class="ri-pages-line pe-nav-icon"></i>
-                        <span class="pe-nav-content">Pages</span>
+                        <span class="pe-nav-content">Fabrics</span>
                         <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
                     </a>
-                    <ul class="pe-slide-menu collapse" id="collapsePages">
-                        <li class="slide pe-nav-content1">
-                            <a href="javascript:void(0)">Pages</a>
-                        </li>
+
+                    <ul class="pe-slide-menu collapse {{ request()->routeIs('fabrics.*') ? 'show' : '' }}" id="collapsePages">
                         <li class="pe-slide-item">
-                            <a href="pages-starter.html" class="pe-nav-link">
-                                Starter Page
+                            <a href="{{ route('fabrics.index') }}" class="pe-nav-link {{ request()->routeIs('fabrics.index') ? 'active' : '' }}">
+                            Fabrics
                             </a>
                         </li>
                         <li class="pe-slide-item">
-                            <a href="pages-profile.html" class="pe-nav-link">
-                                Profile
-                            </a>
-                        </li>
-                        <li class="pe-slide-item pe-has-sub">
-                            <a href="#collapseBlogs" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseBlogs">
-                                <span class="pe-nav-sub-content">Blogs</span>
-                                <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
-                            </a>
-                            <ul class="pe-slide-menu collapse" id="collapseBlogs">
-                                <li class="slide pe-nav-content1">
-                                    <a href="javascript:void(0)">Blog</a>
-                                </li>
-                                <li class="pe-slide-item">
-                                    <a href="pages-blog-list.html" class="pe-nav-link">
-                                        Blog List
-                                    </a>
-                                </li>
-                                <li class="pe-slide-item">
-                                    <a href="pages-blog-details.html" class="pe-nav-link">
-                                        Blog Details
-                                    </a>
-                                </li>
-                                <li class="pe-slide-item">
-                                    <a href="pages-blog-create.html" class="pe-nav-link">
-                                        Create Blog
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="pages-pricing.html" class="pe-nav-link">
-                                Pricing
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="pages-privacy-policy.html" class="pe-nav-link">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="pages-terms-conditions.html" class="pe-nav-link">
-                                Terms & Conditions
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="pages-timeline.html" class="pe-nav-link">
-                                Timeline
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="pages-faqs.html" class="pe-nav-link">
-                                FAQs
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="pages-billing-subscription.html" class="pe-nav-link">
-                                Billing & Subscription
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="not-authorize.html" class="pe-nav-link">
-                                Not Authorized
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="coming-soon.html" class="pe-nav-link">
-                                Comming Soon
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="under-maintenance.html" class="pe-nav-link">
-                                Maintenance
-                            </a>
-                        </li>
-                        <li class="pe-slide-item">
-                            <a href="error.html" class="pe-nav-link">
-                                Error
+                            <a href="{{ route('fabrics.trash') }}" class="pe-nav-link {{ request()->routeIs('fabrics.trash') ? 'active' : '' }}">
+                                Trash Fabrics
                             </a>
                         </li>
                     </ul>
                 </li>
+
             </ul>
         </div>
     </nav>

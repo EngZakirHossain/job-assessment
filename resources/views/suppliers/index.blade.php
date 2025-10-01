@@ -6,7 +6,6 @@
 
 @endpush
 @section('content')
-<div class="container">
     <h3 class="mb-3">Suppliers</h3>
 
     <!-- Filters -->
@@ -184,7 +183,7 @@
                 <div class="card border shadow-sm">
                 <div class="card-body d-flex flex-column align-items-center text-center">
                     <!-- Optional avatar -->
-                    <img src="{{asset('backend/assets')}}/images/avatar/avatar-5.jpg" alt="Supplier Avatar" class="rounded avatar-xl mb-4">
+                    <img src="{{asset('backend/assets')}}/images/avatar/dummy-avatar.jpg" alt="Supplier Avatar" class="rounded avatar-xl mb-4">
 
                     <h5 class="mb-1" id="view_company_name"></h5>
                     <p class="text-muted mb-3 fs-12">Supplier Code: <span class="fw-semibold" id="view_code"></span></p>
@@ -226,7 +225,6 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('scripts')

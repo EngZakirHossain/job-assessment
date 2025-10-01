@@ -1,5 +1,5 @@
 @extends('layouts.masterLayout')
-@section('pageTitle') Trash - Sales @endsection
+@section('pageTitle') Trash - Suppliers @endsection
 
 @section('content')
 <div class="row">
@@ -43,7 +43,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="10" class="text-center text-muted">No suppliers found</td>
+                                <td colspan="10" class="text-center text-muted">No Suppliers Trash Found</td>
                             </tr>
                         @endforelse
 
