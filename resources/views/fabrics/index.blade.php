@@ -50,7 +50,6 @@
                     <th>Supplier</th>
                     <th>Composition</th>
                     <th>GSM</th>
-                    <th>QTY</th>
                     <th>Available Balance</th>
                     <th>Production Type</th>
                     <th>Image</th>
@@ -66,7 +65,6 @@
                     <td>{{ $fabric->supplier->company_name ?? '-' }}</td>
                     <td>{{ $fabric->composition }}</td>
                     <td>{{ $fabric->gsm }}</td>
-                    <td>{{ $fabric->qty }}</td>
                     <td class="fw-bold text-success">
                         {{ \App\Http\Controllers\FabricController::calculateFabricBalance($fabric->id) }}
                     </td>
