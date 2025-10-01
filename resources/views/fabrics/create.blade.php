@@ -118,7 +118,7 @@
             <input type="text" name="fabric_selected_by" class="form-control">
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mt-2">
             <button type="submit" class="btn btn-success">
                 <i class="bi bi-save"></i> Save Fabric
             </button>
