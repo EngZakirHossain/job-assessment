@@ -6,7 +6,9 @@ use App\Models\Fabric;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Milon\Barcode\DNS1D;
 
 class FabricFactory extends Factory
 {
@@ -46,5 +48,19 @@ class FabricFactory extends Factory
             'updated_by' => $updatedBy,
             'updated_date' => $this->faker->dateTimeBetween('-1 years', 'now'),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Fabric $fabric) {
+            $barcode = new DNS1D;
+            $barcodeImage = $barcode->getBarcodePNG($fabric->id, 'C39');
+            $barcodePath = 'barcodes/fabric_'.$fabric->id.'.png';
+
+            Storage::disk('public')->put($barcodePath, base64_decode($barcodeImage));
+
+            $fabric->barcode = $barcodePath;
+            $fabric->save();
+        });
     }
 }

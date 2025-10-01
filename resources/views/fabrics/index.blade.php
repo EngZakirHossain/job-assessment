@@ -1,13 +1,25 @@
 @extends('layouts.masterLayout')
 @section('pageTitle') Fabric List @endsection
+@push('styles')
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+@endpush
 @section('content')
 <!-- Filters -->
 <form method="GET" class="row g-2 mb-4">
-    <div class="col-md-3">
-        <input type="text" name="supplier" class="form-control" placeholder="Supplier"
-                value="{{ request('supplier') }}">
+    <div class="col-md-2">
+        <select name="supplier_id" class="form-select form-control select2">
+            <option value="">Select Supplier</option>
+            @foreach($suppliers as $supplier)
+                <option value="{{ $supplier->id }}"
+                    {{ request()->get('supplier_id') == $supplier->id ? 'selected' : '' }}>
+                    {{ $supplier->company_name }}
+                </option>
+            @endforeach
+        </select>
     </div>
+
     <div class="col-md-2">
         <input type="text" name="fabric_no" class="form-control" placeholder="Fabric No"
                 value="{{ request('fabric_no') }}">
@@ -176,96 +188,106 @@
 @endsection
 
 @push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // View Fabric Modal
-    document.body.addEventListener('click', function (e) {
-        const btn = e.target.closest('.viewFabricBtn');
-        if (!btn) return;
+    document.addEventListener('DOMContentLoaded', function () {
+        // View Fabric Modal
+        document.body.addEventListener('click', function (e) {
+            const btn = e.target.closest('.viewFabricBtn');
+            if (!btn) return;
 
-        const fabricId = btn.dataset.id;
-        const modalEl = document.getElementById('viewFabricModal');
-        const fabricDetails = modalEl.querySelector('#fabricDetails');
+            const fabricId = btn.dataset.id;
+            const modalEl = document.getElementById('viewFabricModal');
+            const fabricDetails = modalEl.querySelector('#fabricDetails');
 
-        fabricDetails.innerHTML = `
-            <div class="text-center py-5">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-2">Loading...</p>
-            </div>
-        `;
+            fabricDetails.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2">Loading...</p>
+                </div>
+            `;
 
-        const modal = new bootstrap.Modal(modalEl);
-        modal.show();
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
 
-        fetch(`/fabrics/${fabricId}/json`)
-            .then(response => response.json())
-            .then(fabric => {
-                fabricDetails.innerHTML = `
-                    <div class="col-md-4 text-center">
-                        <img src="${fabric.image_url}" class="img-fluid rounded mb-3" alt="Fabric Image">
-                        <h6><b>Fabric No:</b> ${fabric.fabric_no ?? '-'}</h6>
-                        <h6><b>GSM:</b> ${fabric.gsm ?? '-'}</h6>
-                        <h6><b>Production:</b> ${fabric.production_type ?? '-'}</h6>
-                        <div class="mt-3">
-                            <strong>Barcode:</strong><br>
-                            <img src="${fabric.barcode_url}" class="img-fluid mt-2" alt="Barcode">
+            fetch(`/fabrics/${fabricId}/json`)
+                .then(response => response.json())
+                .then(fabric => {
+                    fabricDetails.innerHTML = `
+                        <div class="col-md-4 text-center">
+                            <img src="${fabric.image_url}" class="img-fluid rounded mb-3" alt="Fabric Image">
+                            <h6><b>Fabric No:</b> ${fabric.fabric_no ?? '-'}</h6>
+                            <h6><b>GSM:</b> ${fabric.gsm ?? '-'}</h6>
+                            <h6><b>Production:</b> ${fabric.production_type ?? '-'}</h6>
+                            <div class="mt-3">
+                                <strong>Barcode:</strong><br>
+                                <img src="${fabric.barcode_url}" class="img-fluid mt-2" alt="Barcode">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Composition:</strong> ${fabric.composition ?? '-'}</li>
-                            <li class="list-group-item"><strong>Dyeing Method:</strong> ${fabric.dyeing_method ?? '-'}</li>
-                            <li class="list-group-item"><strong>Printing Method:</strong> ${fabric.printing_method ?? '-'}</li>
-                            <li class="list-group-item"><strong>Supplier:</strong> ${fabric.supplier?.company_name ?? '-'}</li>
-                            <li class="list-group-item"><strong>Email:</strong> ${fabric.supplier?.email ?? '-'}</li>
-                            <li class="list-group-item"><strong>Phone:</strong> ${fabric.supplier?.phone ?? '-'}</li>
-                        </ul>
-                    </div>
-                `;
-            })
-            .catch(() => {
-                fabricDetails.innerHTML = `<p class="text-danger text-center">Failed to load fabric details.</p>`;
-            });
+                        <div class="col-md-8">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Composition:</strong> ${fabric.composition ?? '-'}</li>
+                                <li class="list-group-item"><strong>Dyeing Method:</strong> ${fabric.dyeing_method ?? '-'}</li>
+                                <li class="list-group-item"><strong>Printing Method:</strong> ${fabric.printing_method ?? '-'}</li>
+                                <li class="list-group-item"><strong>Supplier:</strong> ${fabric.supplier?.company_name ?? '-'}</li>
+                                <li class="list-group-item"><strong>Email:</strong> ${fabric.supplier?.email ?? '-'}</li>
+                                <li class="list-group-item"><strong>Phone:</strong> ${fabric.supplier?.phone ?? '-'}</li>
+                            </ul>
+                        </div>
+                    `;
+                })
+                .catch(() => {
+                    fabricDetails.innerHTML = `<p class="text-danger text-center">Failed to load fabric details.</p>`;
+                });
+        });
+
+        // Barcode Modal
+        const barcodeModalEl = document.getElementById('barcodeModal');
+        const barcodeModal = new bootstrap.Modal(barcodeModalEl);
+        const barcodePreview = document.getElementById('barcodePreview');
+        const printBtn = document.getElementById('printBarcodeBtn');
+
+        document.body.addEventListener('click', function(e) {
+            const img = e.target.closest('.barcode-open');
+            if (!img) return;
+
+            const barcodeUrl = img.getAttribute('data-barcode');
+            if (!barcodeUrl) return;
+
+            barcodePreview.src = barcodeUrl;
+            barcodeModal.show();
+        });
+
+        // Print barcode
+        printBtn.addEventListener('click', function () {
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head><title>Print Barcode</title></head>
+                <body style="text-align:center; margin:0; padding:20px;">
+                    <img src="${barcodePreview.src}" alt="Barcode" style="max-width:100%; height:auto;">
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+
+            // Wait a bit and then call print
+            printWindow.onload = function() {
+                printWindow.focus();
+                printWindow.print();
+                printWindow.close();
+            };
+        });
+
     });
-
-    // Barcode Modal
-    const barcodeModalEl = document.getElementById('barcodeModal');
-    const barcodeModal = new bootstrap.Modal(barcodeModalEl);
-    const barcodePreview = document.getElementById('barcodePreview');
-    const printBtn = document.getElementById('printBarcodeBtn');
-
-    document.body.addEventListener('click', function(e) {
-        const img = e.target.closest('.barcode-open');
-        if (!img) return;
-
-        const barcodeUrl = img.getAttribute('data-barcode');
-        if (!barcodeUrl) return;
-
-        barcodePreview.src = barcodeUrl;
-        barcodeModal.show();
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Select Supplier",
+            allowClear: true,
+            width: '100%' // make it full width
+        });
     });
-
-    // Print barcode
-    printBtn.addEventListener('click', function () {
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-            <html>
-            <head><title>Print Barcode</title></head>
-            <body style="text-align:center; margin:0; padding:20px;">
-                <img src="${barcodePreview.src}" alt="Barcode" style="max-width:100%; height:auto;">
-            </body>
-            </html>
-        `);
-        printWindow.document.close();
-
-        // Wait a bit and then call print
-        printWindow.onload = function() {
-            printWindow.focus();
-            printWindow.print();
-            printWindow.close();
-        };
-    });
-
-});
 </script>
 @endpush

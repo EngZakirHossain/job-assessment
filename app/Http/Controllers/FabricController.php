@@ -16,11 +16,11 @@ class FabricController extends Controller
     public function index(Request $request)
     {
         $query = Fabric::with('supplier');
-
+        $suppliers = Supplier::all();
         // Filters
-        if ($request->filled('supplier')) {
+        if ($request->filled('supplier_id')) {
             $query->whereHas('supplier', function ($q) use ($request) {
-                $q->where('company_name', 'like', "%{$request->supplier}%");
+                $q->where('id', $request->supplier_id);
             });
         }
 
@@ -38,7 +38,7 @@ class FabricController extends Controller
 
         $fabrics = $query->orderBy('id', 'desc')->paginate(10);
 
-        return view('fabrics.index', compact('fabrics'));
+        return view('fabrics.index', compact('fabrics', 'suppliers'));
     }
 
     public function create()
