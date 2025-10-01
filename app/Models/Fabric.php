@@ -95,4 +95,22 @@ class Fabric extends Model
             }
         });
     }
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image_path && file_exists(storage_path('app/public/'.$this->image_path))) {
+            return asset('storage/'.$this->image_path);
+        }
+
+        return asset('backend/assets/images/avatar/dummy-avatar.jpg');
+    }
+
+    public function getBarcodeUrlAttribute()
+    {
+        if ($this->barcode && file_exists(storage_path('app/public/'.$this->barcode))) {
+            return asset('storage/'.$this->barcode);
+        }
+
+        return asset('backend/assets/images/defaultbarcode.png');
+    }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fabric;
-use App\Models\Supplier;
 use App\Models\FabricStock;
+use App\Models\Supplier;
 
 class HomeController extends Controller
 {
@@ -35,7 +35,7 @@ class HomeController extends Controller
         $supplierData = [$activeSuppliers, $deletedSuppliers];
         $fabricData = [$activeFabrics, $deletedFabrics];
 
-        $totalIn  = FabricStock::where('type', 'in')->sum('qty');
+        $totalIn = FabricStock::where('type', 'in')->sum('qty');
         $totalOut = FabricStock::where('type', 'out')->sum('qty');
         $fabricBalance = $totalIn - $totalOut;
 

@@ -60,8 +60,38 @@ class FabricController extends Controller
         }
 
         $fabric = Fabric::create($data);
+        $barcode = new DNS1D;
+        $barcodeImage = $barcode->getBarcodePNG($fabric->id, 'C39');
+        $barcodePath = 'barcodes/fabric_'.$fabric->id.'.png';
+
+        Storage::disk('public')->put($barcodePath, base64_decode($barcodeImage));
+
+        $fabric->barcode = $barcodePath;
+        $fabric->save();
 
         return redirect()->route('fabrics.index')->with('success', 'Fabric added successfully.');
+    }
+
+    public function getSupplier($id)
+    {
+        $fabric = Fabric::with('supplier')->findOrFail($id);
+
+        return response()->json([
+            'id' => $fabric->id,
+            'fabric_no' => $fabric->fabric_no,
+            'gsm' => $fabric->gsm,
+            'composition' => $fabric->composition,
+            'production_type' => $fabric->production_type,
+            'dyeing_method' => $fabric->dyeing_method,
+            'printing_method' => $fabric->printing_method,
+            'image_url' => $fabric->image_url,
+            'barcode_url' => $fabric->barcode_url,
+            'supplier' => [
+                'company_name' => $fabric->supplier->company_name ?? null,
+                'email' => $fabric->supplier->email ?? null,
+                'phone' => $fabric->supplier->phone ?? null,
+            ],
+        ]);
     }
 
     public function show(Fabric $fabric)

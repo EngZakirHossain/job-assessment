@@ -95,10 +95,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-wrap gap-3 align-items-center mt-5">
-                        <div class="ms-auto lign-items-center">
-                            {{ $suppliers->links() }}
-                        </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $suppliers->links() }}
                     </div>
                 </div>
             </div>

@@ -24,9 +24,8 @@
                            @forelse($fabrics as $fabric)
                             <tr>
                                 <td>#SUP-{{ str_pad($fabric->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                <td class="d-flex align-items-center">
-                                    <span>{{ $fabric->supplier->company_name ?? '-' }}</span>
-                                </td>
+                                <td>{{ $fabric->fabric_no }}</td>
+                                <td>{{ $fabric->supplier->company_name ?? '-' }}</td>
                                 <td>{{ $fabric->composition }}</td>
                                 <td>{{ $fabric->qty }}</td>
                                 <td>{{ $fabric->deleted_at->format('Y-m-d H:i') }}</td>

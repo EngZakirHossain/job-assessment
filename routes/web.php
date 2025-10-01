@@ -30,5 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::post('fabrics/{id}/restore', [FabricController::class, 'restore'])->name('fabrics.restore');
     Route::delete('fabrics/{id}/force-delete', [FabricController::class, 'forceDelete'])->name('fabrics.forceDelete');
     Route::get('/fabrics/{id}/barcode', [FabricController::class, 'barcode'])->name('fabrics.barcode');
+    Route::get('/fabrics/{id}/json', [FabricController::class, 'getSupplier'])->name('fabrics.json');
 
 });
