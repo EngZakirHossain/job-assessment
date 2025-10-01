@@ -27,6 +27,8 @@ class UpdateSupplierRequest extends FormRequest
             'code' => 'required|string|max:100|unique:suppliers,code,'.$this->route('supplier')->id,
             'email' => 'nullable|email',
             'phone' => 'nullable|string|max:50',
+            'address' => 'nullable|string|max:200',
+            'rep_name' => 'nullable|string|max:50',
             'rep_email' => 'nullable|email',
             'rep_phone' => 'nullable|string|max:50',
         ];
