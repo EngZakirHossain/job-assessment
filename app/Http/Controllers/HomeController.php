@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fabric;
 use App\Models\Supplier;
+use App\Models\FabricStock;
 
 class HomeController extends Controller
 {
@@ -34,13 +35,18 @@ class HomeController extends Controller
         $supplierData = [$activeSuppliers, $deletedSuppliers];
         $fabricData = [$activeFabrics, $deletedFabrics];
 
+        $totalIn  = FabricStock::where('type', 'in')->sum('qty');
+        $totalOut = FabricStock::where('type', 'out')->sum('qty');
+        $fabricBalance = $totalIn - $totalOut;
+
         return view('dashboard', compact(
             'activeSuppliers',
             'deletedSuppliers',
             'activeFabrics',
             'deletedFabrics',
             'supplierData',
-            'fabricData'
+            'fabricData',
+            'fabricBalance'
         ));
     }
 }

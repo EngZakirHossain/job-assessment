@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('suppliers-trash', [SupplierController::class, 'trash'])->name('suppliers.trash');
     Route::post('suppliers/{id}/restore', [SupplierController::class, 'restore'])->name('suppliers.restore');
     Route::delete('suppliers/{id}/force-delete', [SupplierController::class, 'forceDelete'])->name('suppliers.forceDelete');
+    Route::get('/suppliers/{supplier}/json', [SupplierController::class, 'getSupplier'])->name('suppliers.get-json');
 
     // Fabrics
     Route::resource('fabrics', FabricController::class);

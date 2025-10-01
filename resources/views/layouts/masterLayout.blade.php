@@ -1,25 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en">
+<head>
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Job Assessment</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta content="Job Assessment" name="description" />
-        <meta content="" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <title>Fashion Step Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta content="Admin & Dashboards Template" name="description" />
+    <meta content="Pixeleyez" name="author" />
 
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets')}}/images/default.jpg">
+    <!-- layout setup -->
+    <script type="module" src="{{asset('backend/assets')}}/js/layout-setup.js"></script>
 
-        <!-- App css -->
-        <link href="{{asset('assets')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets')}}/css/jquery-ui.min.css" rel="stylesheet">
-        <link href="{{asset('assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets')}}/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets')}}/css/app.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('backend/assets')}}/images/favicon.png">    <link rel="stylesheet" href="{{asset('backend/assets')}}/libs/gridjs/theme/mermaid.min.css">
+    <!-- Simplebar Css -->
+    <link rel="stylesheet" href="{{asset('backend/assets')}}/libs/simplebar/simplebar.min.css">
+    <!-- Swiper Css -->
+    <link href="{{asset('backend/assets')}}/libs/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Nouislider Css -->
+    <link href="{{asset('backend/assets')}}/libs/nouislider/nouislider.min.css" rel="stylesheet">
+    <!-- Bootstrap Css -->
+    <link href="{{asset('backend/assets')}}/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <!--icons css-->
+    <link href="{{asset('backend/assets')}}/css/icons.min.css" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link href="{{asset('backend/assets')}}/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
 
         @stack('styles')
 
@@ -31,33 +36,40 @@
             @include('layouts.topBar')
 
             <!-- Page Content-->
-            <div class="page-content">
+            <main class="app-wrapper">
                 <div class="container-fluid">
                     @include('layouts.breadcrumb')
                     @yield('content')
                 </div><!-- container -->
-
-                <footer class="footer text-center text-sm-left">
-                    &copy; {{date('Y')}} Job Assessment <span class="d-none d-sm-inline-block float-right">Developed <i class="mdi mdi-heart text-danger"></i> by Zakir Hossain</span>
-                </footer><!--end footer-->
-            </div>
+            </main>>
             <!-- end page content -->
         </div>
         <!-- end page-wrapper -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between align-items-center gap-2">
+                    <script>document.write(new Date().getFullYear())</script> © Zakir
+                    <div class="text-sm-end d-none d-sm-block">
+                        Develop by Zakir Hossain
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <!-- jQuery  -->
-        <script src="{{asset('assets')}}/js/jquery.min.js"></script>
-        <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js"></script>
-        <script src="{{asset('assets')}}/js/metismenu.min.js"></script>
-        <script src="{{asset('assets')}}/js/waves.js"></script>
-        <script src="{{asset('assets')}}/js/feather.min.js"></script>
-        <script src="{{asset('assets')}}/js/simplebar.min.js"></script>
-        <script src="{{asset('assets')}}/js/jquery-ui.min.js"></script>
-        <script src="{{asset('assets')}}/js/moment.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="{{asset('backend/assets')}}/libs/swiper/swiper-bundle.min.js"></script>
+        <script src="{{asset('backend/assets')}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="{{asset('backend/assets')}}/libs/simplebar/simplebar.min.js"></script>
+        <script src="{{asset('backend/assets')}}/js/scroll-top.init.js"></script>    <script src="{{asset('backend/assets')}}/libs/gridjs/gridjs.umd.js" type="text/javascript"></script>
+
+        <script src="{{asset('backend/assets')}}/libs/apexcharts/apexcharts.min.js"></script>
+        <!-- File js -->
+        <script src="{{asset('backend/assets')}}/js/dashboard/e-commerce.init.js"></script>
+        <!-- App js -->
+        <script type="module" src="{{asset('backend/assets')}}/js/app.js"></script>
 
         <!-- App js -->
-        <script src="{{asset('assets')}}/js/app.js"></script>
+        <script src="{{asset('backend/assets')}}/js/app.js"></script>
         <script>
             $(document).ready(function() {
                 @if(session('success'))
@@ -76,21 +88,6 @@
                     toastr.info("{{ session('info') }}");
                 @endif
             });
-        </script>
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "positionClass": "toast-bottom-right",
-                "showDuration": "3000",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
         </script>
 
         @stack('scripts')

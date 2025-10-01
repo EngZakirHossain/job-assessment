@@ -2,49 +2,62 @@
 @section('pageTitle') Trash - Sales @endsection
 
 @section('content')
-<div class="container">
-    <h3 class="mb-3">Trashed Suppliers</h3>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
 
-    <a href="{{ route('suppliers.index') }}" class="btn btn-secondary mb-3">← Back</a>
+                <div class="table-box table-responsive">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Company</th>
+                                <th>Country</th>
+                                <th>Code</th>
+                                <th>Deleted At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($trashed  as $supplier)
+                            <tr>
+                                <td>#SUP-{{ str_pad($supplier->id, 4, '0', STR_PAD_LEFT) }}</td>
+                                <td class="d-flex align-items-center">
+                                    <span>{{ $supplier->company_name }}</span>
+                                </td>
+                                <td>{{ $supplier->country }}</td>
+                                <td>{{ $supplier->code }}</td>
+                                <td>{{ $supplier->deleted_at->format('Y-m-d H:i') }}</td>
+                                <td>
+                                    <form action="{{ route('suppliers.restore', $supplier->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button class="btn btn-sm btn-success"><i class="bi bi-arrow-counterclockwise"></i>  Restore</button>
+                                    </form>
+                                    <form action="{{ route('suppliers.forceDelete', $supplier->id) }}" method="POST" class="d-inline"
+                                        onsubmit="return confirm('Permanently delete this supplier?')">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Delete Forever</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="10" class="text-center text-muted">No suppliers found</td>
+                            </tr>
+                        @endforelse
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped align-middle">
-            <thead>
-                <tr>
-                    <th>Company</th>
-                    <th>Country</th>
-                    <th>Code</th>
-                    <th>Deleted At</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            @forelse($trashed as $supplier)
-                <tr>
-                    <td>{{ $supplier->company_name }}</td>
-                    <td>{{ $supplier->country }}</td>
-                    <td>{{ $supplier->code }}</td>
-                    <td>{{ $supplier->deleted_at->format('Y-m-d H:i') }}</td>
-                    <td>
-                        <form action="{{ route('suppliers.restore', $supplier->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button class="btn btn-sm btn-success">Restore</button>
-                        </form>
-                        <form action="{{ route('suppliers.forceDelete', $supplier->id) }}" method="POST" class="d-inline"
-                              onsubmit="return confirm('Permanently delete this supplier?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-danger">Delete Forever</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr><td colspan="5" class="text-center">No trashed suppliers</td></tr>
-            @endforelse
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex flex-wrap gap-3 align-items-center mt-5">
+                    <div class="ms-auto lign-items-center">
+                        {{ $trashed->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    {{ $trashed->links() }}
 </div>
 @endsection
 @push('scripts')

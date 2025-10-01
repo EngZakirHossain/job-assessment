@@ -50,11 +50,16 @@ class SupplierController extends Controller
         return view('suppliers.edit', compact('supplier'));
     }
 
+    public function getSupplier(Supplier $supplier)
+    {
+        return response()->json($supplier);
+    }
+
     public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
         $supplier->update($request->validated());
 
-        return redirect()->route('suppliers.index')->with('success', 'Supplier updated');
+        return response()->json(['success' => true]);
     }
 
     public function destroy(Supplier $supplier)
