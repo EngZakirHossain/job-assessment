@@ -84,14 +84,14 @@ class Fabric extends Model
                         'qty' => abs($difference),
                         'created_by' => auth()->id(),
                     ]);
-                } else {
-                    FabricStock::create([
-                        'fabric_id' => $fabric->id,
-                        'type' => 'in',
-                        'qty' => $fabric->qty ?? 0,
-                        'created_by' => auth()->id(),
-                    ]);
                 }
+            } else {
+                FabricStock::create([
+                    'fabric_id' => $fabric->id,
+                    'type' => 'in',
+                    'qty' => $fabric->qty ?? 0,
+                    'created_by' => auth()->id(),
+                ]);
             }
         });
     }
