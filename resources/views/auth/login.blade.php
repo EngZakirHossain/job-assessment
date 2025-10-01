@@ -56,6 +56,10 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <!-- Demo Login Button -->
+                                <button type="button" id="demoLogin" class="btn btn-outline-secondary ms-2">
+                                    Use Default Admin
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -64,4 +68,10 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('demoLogin').addEventListener('click', function() {
+        document.getElementById('email').value = "admin@gmail.com";
+        document.getElementById('password').value = "123456";
+    });
+</script>
 @endsection
