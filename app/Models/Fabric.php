@@ -72,16 +72,23 @@ class Fabric extends Model
         });
 
         static::updated(function ($fabric) {
-            $stock = FabricStock::where('fabric_id', $fabric->id)->latest()->first();
+            $latestStock = FabricStock::where('fabric_id', $fabric->id)->latest()->first();
 
-            if ($stock) {
-                $difference = $fabric->qty - $stock->qty;
+            if ($latestStock) {
+                $difference = $fabric->qty - $latestStock->qty;
 
                 if ($difference != 0) {
                     FabricStock::create([
                         'fabric_id' => $fabric->id,
                         'type' => $difference > 0 ? 'in' : 'out',
                         'qty' => abs($difference),
+                        'created_by' => auth()->id(),
+                    ]);
+                } else {
+                    FabricStock::create([
+                        'fabric_id' => $fabric->id,
+                        'type' => 'in',
+                        'qty' => $fabric->qty ?? 0,
                         'created_by' => auth()->id(),
                     ]);
                 }
